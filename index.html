@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f3f4f6">
+    <meta name="description" content="Crea contraseñas seguras y personalizadas en segundos.">
+    <title>Generador de contraseñas</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body class="min-h-screen bg-gray-100 text-gray-800 antialiased">
+    <main class="flex min-h-screen items-center justify-center px-4 py-10">
+        <section class="w-full max-w-xl">
+            <header class="mb-8 text-center">
+                <h1 class="text-3xl font-bold text-blue-600">Generador de contraseñas</h1>
+            </header>
+
+            <div class="rounded-lg border border-gray-200 bg-white p-5 shadow-md sm:p-8">
+                <div class="mb-7">
+                    <div class="mb-3 flex items-center justify-between gap-4">
+                        <label for="datos" class="text-sm font-medium text-gray-700">Tu contraseña</label>
+                        <span id="strengthLabel" class=""></span>
+                    </div>
+                    <div class="flex min-h-16 items-center gap-3 rounded-md border border-gray-300 bg-gray-50 p-3 sm:p-4">
+                        <output id="datos" aria-live="polite" aria-label="Contraseña generada" class="min-w-0 flex-1 break-all font-mono text-lg font-medium text-gray-900 sm:text-xl"></output>
+                        <button id="copyButton" type="button" aria-label="Copiar contraseña" title="Copiar contraseña" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-600 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 active:scale-95 sm:h-12 sm:w-12">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-5 w-5">
+                                <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.7" />
+                                <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.7" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                </div>
+
+                <div class="mb-7">
+                    <div class="mb-4 flex items-center justify-between">
+                        <label for="longitud" class="text-sm font-medium text-gray-700">Longitud</label>
+                        <span id="sliderValue" class="rounded-md border border-gray-300 bg-gray-50 px-2.5 py-1 text-sm font-semibold tabular-nums text-gray-800">16</span>
+                    </div>
+                    <input type="range" name="longitud" id="longitud" min="4" max="64" value="16" aria-label="Longitud de la contraseña" class="h-2 w-full cursor-pointer accent-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                    <div class="mt-2 flex justify-between text-xs text-gray-500"><span>4</span><span>64</span></div>
+                </div>
+
+                <fieldset>
+                    <legend class="mb-3 text-sm font-medium text-gray-700">Incluir en la contraseña</legend>
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <label for="upper" class="flex cursor-pointer items-center gap-3 rounded-md border border-gray-200 bg-gray-50 p-3 hover:bg-gray-100">
+                            <input class="charset h-4 w-4 accent-blue-600" id="upper" type="checkbox" checked>
+                            <span class="min-w-0 flex-1"><span class="block text-sm font-medium text-gray-800">Mayúsculas</span><span class="text-xs text-gray-500">Letras A–Z</span></span>
+                            <span aria-hidden="true" class="font-mono text-xs text-gray-500">ABC</span>
+                        </label>
+                        <label for="lower" class="flex cursor-pointer items-center gap-3 rounded-md border border-gray-200 bg-gray-50 p-3 hover:bg-gray-100">
+                            <input class="charset h-4 w-4 accent-blue-600" id="lower" type="checkbox" checked>
+                            <span class="min-w-0 flex-1"><span class="block text-sm font-medium text-gray-800">Minúsculas</span><span class="text-xs text-gray-500">Letras a–z</span></span>
+                            <span aria-hidden="true" class="font-mono text-xs text-gray-500">abc</span>
+                        </label>
+                        <label for="numbers" class="flex cursor-pointer items-center gap-3 rounded-md border border-gray-200 bg-gray-50 p-3 hover:bg-gray-100">
+                            <input class="charset h-4 w-4 accent-blue-600" id="numbers" type="checkbox" checked>
+                            <span class="min-w-0 flex-1"><span class="block text-sm font-medium text-gray-800">Números</span><span class="text-xs text-gray-500">Dígitos 0–9</span></span>
+                            <span aria-hidden="true" class="font-mono text-xs text-gray-500">123</span>
+                        </label>
+                        <label for="symbols" class="flex cursor-pointer items-center gap-3 rounded-md border border-gray-200 bg-gray-50 p-3 hover:bg-gray-100">
+                            <input class="charset h-4 w-4 accent-blue-600" id="symbols" type="checkbox" checked>
+                            <span class="min-w-0 flex-1"><span class="block text-sm font-medium text-gray-800">Símbolos</span><span class="text-xs text-gray-500">Caracteres especiales</span></span>
+                            <span aria-hidden="true" class="font-mono text-xs text-gray-500">!@#</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <button id="generateButton" type="button" class="mt-7 flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                    Generar contraseña
+                </button>
+            </div>
+
+            
+        </section>
+    </main>
+</body>
+
+</html>
